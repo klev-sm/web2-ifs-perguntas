@@ -1,0 +1,39 @@
+﻿@page
+@model PerguntasModel
+@{
+    ViewData["Title"] = "Perguntas - IFS Perguntas";
+}
+
+<div class="container mt-4">
+    <h2>Perguntas Recentes</h2>
+    @if (Model.Perguntas != null && Model.Perguntas.Any())
+    {
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Título</th>
+                        <th>Data</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var pergunta in Model.Perguntas)
+                    {
+                        <tr>
+                            <td>@pergunta.Titulo</td>
+                            <td>@pergunta.DataPostagem.ToShortDateString()</td>
+                            <td>
+                                <a class="btn btn-info" href="/Pergunta/@pergunta.ID">Ver Detalhes</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+    else
+    {
+        <p>Não há perguntas no momento.</p>
+    }
+</div>

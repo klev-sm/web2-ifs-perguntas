@@ -1,0 +1,21 @@
+﻿@page
+@model PostPerguntaModel
+@{
+    ViewData["Title"] = "Postar Pergunta";
+}
+
+<h1>Postar Pergunta</h1>
+
+<form method="post">
+    <div>
+        <label asp-for="Input.Titulo"></label>
+        <input asp-for="Input.Titulo" />
+        <span asp-validation-for="Input.Titulo"></span>
+    </div>
+    <div>
+        <label asp-for="Input.Descricao"></label>
+        <textarea asp-for="Input.Descricao"></textarea>
+        <span asp-validation-for="Input.Descricao"></span>
+    </div>
+    <button type="submit">Postar</button>
+</form>
