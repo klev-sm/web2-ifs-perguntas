@@ -1,0 +1,51 @@
+﻿@page "{id:int}"
+@model DetalhesPerguntaModel
+@{
+    ViewData["Title"] = "Detalhes da Pergunta";
+}
+
+<div class="container mt-4">
+    <h2>@Model.Pergunta.Titulo</h2>
+    <p class="text-muted">Postado por: @Model.Pergunta.Usuario?.UserName em @Model.Pergunta.DataPostagem.ToShortDateString()</p>
+    <p>@Model.Pergunta.Descricao</p>
+
+    <hr />
+
+    <h4>Respostas:</h4>
+
+    @if (Model.Respostas != null && Model.Respostas.Any())
+    {
+        <ul class="list-group">
+            @foreach (var resposta in Model.Respostas)
+            {
+                <li class="list-group-item">
+                    <p>@resposta.Descricao</p>
+                    <p class="text-muted">Respondido por: @resposta.Usuario?.UserName em @resposta.DataPostagem.ToShortDateString()</p>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Não há respostas para esta pergunta.</p>
+    }
+
+    <hr />
+
+    <!-- Formulário de Resposta -->
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h4>Adicionar Resposta:</h4>
+        <form method="post">
+            <div class="mb-3">
+                <textarea asp-for="NovaResposta" class="form-control" rows="5" placeholder="Digite sua resposta aqui..."></textarea>
+                <span asp-validation-for="NovaResposta" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar Resposta</button>
+        </form>
+    }
+    else
+    {
+        <p>Você precisa estar logado para responder.</p>
+    }
+</div>

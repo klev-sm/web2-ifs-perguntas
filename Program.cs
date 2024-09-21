@@ -30,6 +30,7 @@ builder.Services.AddAuthorization(options =>
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
+builder.Logging.AddConsole();
 
 // Configura o pipeline de solicitação HTTP
 if (!app.Environment.IsDevelopment())

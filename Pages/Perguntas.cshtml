@@ -6,6 +6,11 @@
 
 <div class="container mt-4">
     <h2>Perguntas Recentes</h2>
+
+    <div class="text-end">
+        <a class="btn btn-success mb-3" href="/CriarPergunta">Criar Nova Pergunta</a>
+    </div>
+
     @if (Model.Perguntas != null && Model.Perguntas.Any())
     {
         <div class="table-responsive">
@@ -14,6 +19,7 @@
                     <tr>
                         <th>Título</th>
                         <th>Data</th>
+                        <th>Usuário</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
@@ -23,8 +29,9 @@
                         <tr>
                             <td>@pergunta.Titulo</td>
                             <td>@pergunta.DataPostagem.ToShortDateString()</td>
+                            <td>@pergunta.Usuario?.UserName</td>
                             <td>
-                                <a class="btn btn-info" href="/Pergunta/@pergunta.ID">Ver Detalhes</a>
+                                <a class="btn btn-info" href="/DetalhesPergunta/@pergunta.ID">Ver Detalhes</a>
                             </td>
                         </tr>
                     }

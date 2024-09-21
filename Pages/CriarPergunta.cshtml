@@ -1,0 +1,37 @@
+﻿@page
+@model CriarPerguntaModel
+@{
+    ViewData["Title"] = "Criar Pergunta";
+}
+
+<div class="container mt-5">
+    <h2>Criar Nova Pergunta</h2>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <div class="alert alert-danger">
+            <ul>
+                @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                {
+                    <li>@error.ErrorMessage</li>
+                }
+            </ul>
+        </div>
+    }
+
+    <form method="post">
+        <div class="mb-3">
+            <label asp-for="Input.Titulo" class="form-label"></label>
+            <input asp-for="Input.Titulo" class="form-control" />
+            <span asp-validation-for="Input.Titulo" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Input.Descricao" class="form-label"></label>
+            <textarea asp-for="Input.Descricao" class="form-control"></textarea>
+            <span asp-validation-for="Input.Descricao" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Pergunta</button>
+    </form>
+</div>

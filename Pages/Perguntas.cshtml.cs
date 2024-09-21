@@ -1,21 +1,29 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Web2.Models; // Certifique-se de que está no namespace correto
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Web2.Data;
+using Web2.Models;
 
 namespace Web2.Pages
 {
     public class PerguntasModel : PageModel
     {
+        private readonly AppDbContext _context;
+
+        public PerguntasModel(AppDbContext context)
+        {
+            _context = context;
+        }
+
         public List<Pergunta> Perguntas { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            // Simulação de perguntas carregadas. Substitua pela lógica de banco de dados
-            Perguntas = new List<Pergunta>
-            {
-                new Pergunta { ID = 1, Titulo = "O que é ASP.NET?", DataPostagem = DateTime.Now.AddDays(-2) },
-                new Pergunta { ID = 2, Titulo = "Como usar Entity Framework?", DataPostagem = DateTime.Now.AddDays(-1) }
-            };
+            Perguntas = await _context.Perguntas
+                                      .Include(p => p.Usuario) 
+                                      .OrderByDescending(p => p.DataPostagem) 
+                                      .ToListAsync();
         }
     }
 }
