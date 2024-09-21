@@ -24,6 +24,9 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
+                                <a class="nav-link" href="/PerguntasCurtidas">Perguntas Curtidas</a>
+                            </li>
+                            <li class="nav-item">
                                 <a class="nav-link" href="/Account/Logout">Sair</a>
                             </li>
                         }
@@ -47,9 +50,6 @@
     </main>
     <footer class="text-muted py-3">
         <div class="container">
-            <p class="float-end">
-                <a href="#">Voltar ao topo</a>
-            </p>
             <p>&copy; 2024 - Web2 IFS Perguntas</p>
         </div>
     </footer>

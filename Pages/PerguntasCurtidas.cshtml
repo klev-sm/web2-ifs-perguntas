@@ -1,0 +1,28 @@
+﻿@page
+@model Web2.Pages.PerguntasCurtidasModel
+@{
+    ViewData["Title"] = "Perguntas Curtidas";
+}
+
+<div class="container mt-4">
+    <h2>Perguntas Curtidas</h2>
+
+    @if (Model.PerguntasCurtidas != null && Model.PerguntasCurtidas.Any())
+    {
+        <ul class="list-group">
+            @foreach (var pergunta in Model.PerguntasCurtidas)
+            {
+                <li class="list-group-item">
+                    <h5>@pergunta.Titulo</h5>
+                    <p>@pergunta.Descricao</p>
+                    <p class="text-muted">Postado por: @pergunta.Usuario?.UserName em @pergunta.DataPostagem.ToShortDateString()</p>
+                    <a asp-page="/DetalhesPergunta" asp-route-id="@pergunta.ID" class="btn btn-primary">Ver Detalhes</a>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Nenhuma pergunta curtida foi encontrada.</p>
+    }
+</div>
