@@ -32,6 +32,15 @@
                             <td>@pergunta.Usuario?.UserName</td>
                             <td>
                                 <a class="btn btn-info" href="/DetalhesPergunta/@pergunta.ID">Ver Detalhes</a>
+
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <form method="post" asp-page-handler="CurtirPergunta" asp-route-id="@pergunta.ID" class="d-inline">
+                                        <button type="submit" class="btn btn-primary">
+                                            Curtir (@Model.GetCurtidasPerguntaCount(pergunta.ID))
+                                        </button>
+                                    </form>
+                                }
                             </td>
                         </tr>
                     }
